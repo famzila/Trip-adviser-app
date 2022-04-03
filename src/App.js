@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// Normalizing the style with Material's CssBaseline
+import { CssBaseline, Grid} from "@material-ui/core";
+
+import Header from "./components/Header/header";
+import List from "./components/List/list";
+import Map from "./components/Map/map";
+import Place from "./components/Place/place";
+import Footer from "./components/Footer/footer";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CssBaseline />
+      <Header />
+      <Grid container spacing={3} style= {{ width: "100%" }} >
+        {/* On mobile devices the item takes the whole place (12), on medium devices only (4) */}
+          <Grid item ws={12} md={4}>
+              <List />
+          </Grid>
+          <Grid item ws={12} md={8}>
+              <Map />
+          </Grid>
+      </Grid>
+      <Footer />
+    </>
   );
 }
 
