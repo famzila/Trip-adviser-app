@@ -22,13 +22,13 @@ function App() {
 
   // dependency set to [coordinates, bounds], whenver they are updated relaunch the apie.
   useEffect(() => {
-    if(bounds){
+    if (bounds) {
       getPlacesData(bounds.sw, bounds.ne).then(data => {
-      console.log(data);
-      setPlaces(data);
-    })
+        console.log(data);
+        setPlaces(data);
+      })
     }
-    
+
   }, [coordinates, bounds])
   return (
     <>
@@ -37,10 +37,10 @@ function App() {
       <Grid container spacing={3} style={{ width: "100%" }} >
         {/* On mobile devices the item takes the whole place (12), on medium devices only (4) */}
         <Grid item ws={12} md={4}>
-          <List places={places}/>
+          <List places={places} />
         </Grid>
         <Grid item ws={12} md={8}>
-          <Map setCoordinates={setCoordinates} setBounds={setBounds} coordinates={coordinates} />
+          <Map setCoordinates={setCoordinates} setBounds={setBounds} coordinates={coordinates} places = {places} />
         </Grid>
       </Grid>
       <Footer />
