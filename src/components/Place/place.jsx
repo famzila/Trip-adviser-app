@@ -1,24 +1,17 @@
-import React from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Chip,
-} from "@material-ui/core";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import PhoneIcon from "@material-ui/icons/Phone";
-import Rating from "@material-ui/lab/Rating";
+import React from 'react';
+import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import PhoneIcon from '@material-ui/icons/Phone';
+import Rating from '@material-ui/lab/Rating';
 
-import useStyles from "./styles.js";
+import useStyles from '../../styles/place-styles.js';
 
-export default function ({ place }) {
+const Place = ({ place, selected, refProp }) => {
+  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const classes = useStyles();
-  const defaultImg =
-    "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg";
+
+  const defaultImg = 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg';
+  
   return (
     <Card elevation={6}>
       <CardMedia
@@ -27,53 +20,37 @@ export default function ({ place }) {
         title={place.name}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5">
-          {place.name}
-        </Typography>
-        <Box display="flex" justifyContent={"space-between"}>
-          <Typography variant="subtitle1">Price</Typography>
-          <Typography gutterBottom variant="subtitle1">
-            {place.price_level}
-          </Typography>
+        <Typography gutterBottom variant="h5">{place.name}</Typography>
+        <Box display="flex" justifyContent="space-between" my={2}>
+          <Rating name="read-only" value={Number(place.rating)} readOnly />
+          <Typography component="legend">{place.num_reviews} review{place.num_reviews > 1 && 's'}</Typography>
         </Box>
         <Box display="flex" justifyContent="space-between">
-          <Typography variant="subtitle1">Ranking</Typography>
+          <Typography component="legend">Ranking</Typography>
           <Typography gutterBottom variant="subtitle1">
             {place.ranking}
           </Typography>
         </Box>
-        {/* Awards */}
         {place?.awards?.map((award) => (
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            my={1}
-            alignItems="center"
-          >
-            <img src={award.images.small} alt={award.display_name} />
-            <Typography variant="subtitle2" color="textSecondary">
-              {award.display_name}
-            </Typography>
+          <Box display="flex" justifyContent="space-between" my={1} alignItems="center">
+            <img src={award.images.small} />
+            <Typography variant="subtitle2" color="textSecondary">{award.display_name}</Typography>
           </Box>
         ))}
-        {/* Cuisine type */}
         {place?.cuisine?.map(({ name }) => (
           <Chip key={name} size="small" label={name} className={classes.chip} />
         ))}
-        {/* Place address */}
         {place.address && (
           <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
             <LocationOnIcon />{place.address}
           </Typography>
         )}
-        {/* Place contact */}
         {place.phone && (
-          <Typography gutterBottom variant="body2" color="textSecondary" className={classes.spacing}>
-            <PhoneIcon />{place.phone}
+          <Typography variant="body2" color="textSecondary" className={classes.spacing}>
+            <PhoneIcon /> {place.phone}
           </Typography>
         )}
       </CardContent>
-      {/* Card's actions */}
       <CardActions>
         <Button size="small" color="primary" onClick={() => window.open(place.web_url, '_blank')}>
           Trip Advisor
@@ -84,4 +61,6 @@ export default function ({ place }) {
       </CardActions>
     </Card>
   );
-}
+};
+
+export default Place;
