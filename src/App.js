@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { CssBaseline, Grid } from '@material-ui/core';
 
 import { getPlacesData, getWeatherData } from './api/index';
-import Header from './components/Header/header';
-import List from './components/List/list';
-import Map from './components/Map/map';
+import Header from './components/header';
+import List from './components/list';
+import Map from './components/map';
 
 const App = () => {
   const [type, setType] = useState('restaurants');
