@@ -6,7 +6,7 @@
 - For Map layer style: SNAZZY Maps
 - For UI: Material UI
 
-## See it (on live](https://trips-79ghw1jor-famzila.vercel.app/)
+## See it [on live](https://trips-79ghw1jor-famzila.vercel.app/)
 
 ![image](https://user-images.githubusercontent.com/37409120/162404285-7a3daacc-88c1-44fc-b31e-6ec4c5394548.png)
 
